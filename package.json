@@ -1,0 +1,15 @@
+{
+  "name": "homeiq",
+  "version": "1.0.0",
+  "description": "HomeIQ Phase 1 Project",
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && .\\venv\\Scripts\\uvicorn app.main:app --reload --port 8000",
+    "dev:mcp:appliance": "cd backend && .\\venv\\Scripts\\python mcp_servers/appliance_server.py",
+    "dev:mcp:warranty": "cd backend && .\\venv\\Scripts\\python mcp_servers/warranty_server.py",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:mcp:appliance\" \"npm run dev:mcp:warranty\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
