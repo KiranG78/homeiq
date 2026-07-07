@@ -14,3 +14,4 @@ httpx>=0.28.1
 loguru==0.7.3
 anthropic>=0.39.0
 deprecated
+apscheduler

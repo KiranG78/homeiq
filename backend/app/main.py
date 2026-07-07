@@ -39,7 +39,10 @@ async def lifespan(app: FastAPI):
     yield
     
     logger.info("Shutting down...")
-    await exit_stack.aclose()
+    try:
+        await exit_stack.aclose()
+    except BaseException as e:
+        logger.warning(f"Suppressed shutdown error: {e}")
 
 app = FastAPI(title="HomeIQ API", version="1.0.0", lifespan=lifespan)
 
