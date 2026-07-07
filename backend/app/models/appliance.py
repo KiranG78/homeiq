@@ -20,9 +20,13 @@ class Appliance(Base):
     notes              = Column(Text)
     invoice_image_path = Column(Text)
     extracted_raw_text = Column(Text)
+    extracted_json     = Column(Text)
+    expected_lifespan_years = Column(Float)
+    estimated_annual_energy_cost = Column(Float)
     created_at         = Column(DateTime, server_default=func.now())
     updated_at         = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     warranty = relationship("Warranty", back_populates="appliance",
                             uselist=False, cascade="all, delete-orphan")
+    maintenance_tasks = relationship("MaintenanceTask", back_populates="appliance", cascade="all, delete-orphan")
     user     = relationship("User", back_populates="appliances")

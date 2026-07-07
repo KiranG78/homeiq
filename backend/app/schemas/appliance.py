@@ -49,7 +49,12 @@ class ApplianceCreate(BaseModel):
     purchase_retailer:  Optional[str] = None
     location:           Optional[str] = None
     notes:              Optional[str] = None
+    invoice_image_path: Optional[str] = None
+    extracted_raw_text: Optional[str] = None
+    extracted_json:     Optional[str] = None
     warranty:           Optional[WarrantyCreate] = None  # included in same request
+
+    model_config = {"protected_namespaces": ()}
 
 class ApplianceUpdate(BaseModel):
     name:              Optional[str] = None
@@ -61,6 +66,8 @@ class ApplianceUpdate(BaseModel):
     purchase_retailer: Optional[str] = None
     location:          Optional[str] = None
     notes:             Optional[str] = None
+
+    model_config = {"protected_namespaces": ()}
 
 class ApplianceResponse(BaseModel):
     id:                int
@@ -74,9 +81,14 @@ class ApplianceResponse(BaseModel):
     purchase_retailer: Optional[str]
     location:          Optional[str]
     notes:             Optional[str]
+    extracted_json:    Optional[str] = None
     age_years:         Optional[float] = None
+    expected_lifespan_years: Optional[float] = None
+    estimated_annual_energy_cost: Optional[float] = None
+    invoice_image_path: Optional[str] = None
     warranty:          Optional[WarrantyResponse] = None
     created_at:        datetime
 
     class Config:
         from_attributes = True
+        protected_namespaces = ()

@@ -12,6 +12,11 @@ async def get_profile(db: AsyncSession = Depends(get_db)):
     service = ProfileService(db)
     user = await service.get_profile(user_id=1) # Hardcoded for Phase 1
     if not user:
+        from sqlalchemy.future import select
+        from app.models.user import User
+        result = await db.execute(select(User))
+        user = result.scalars().first()
+    if not user:
         raise HTTPException(status_code=404, detail="Profile not found")
     return user
 
@@ -23,7 +28,16 @@ async def create_profile(data: UserCreate, db: AsyncSession = Depends(get_db)):
 @router.put("/", response_model=UserResponse)
 async def update_profile(data: UserUpdate, db: AsyncSession = Depends(get_db)):
     service = ProfileService(db)
-    user = await service.update_profile(user_id=1, data=data)
+    # First get the user to update
+    user = await service.get_profile(user_id=1)
+    if not user:
+        from sqlalchemy.future import select
+        from app.models.user import User
+        result = await db.execute(select(User))
+        user = result.scalars().first()
+        
     if not user:
         raise HTTPException(status_code=404, detail="Profile not found")
-    return user
+        
+    updated_user = await service.update_profile(user_id=user.id, data=data)
+    return updated_user

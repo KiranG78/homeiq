@@ -1,6 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+}
 
 @layer base {
   :root {
@@ -17,24 +25,27 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 230 40% 4%; /* Deep dark blue/black */
     --foreground: 210 40% 98%;
 
-    --primary: 217.2 91.2% 59.8%;
+    --primary: 190 90% 55%; /* Neon Cyan/Electric Blue */
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 230 35% 8%; /* Slightly lighter deep blue */
     --card-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
+    --border: 230 30% 15%; /* Subtle border */
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--color-border);
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', sans-serif;
   }
 }
+

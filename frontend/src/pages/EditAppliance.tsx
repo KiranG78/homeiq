@@ -74,18 +74,18 @@ export default function EditAppliance() {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-3xl mx-auto p-6"
     >
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+      <div className="bg-card/40 backdrop-blur-xl rounded-2xl shadow-sm border border-border/40 p-8">
         <div className="flex justify-between items-start mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-slate-100 rounded-xl text-slate-600">
+            <div className="p-3 bg-secondary/20 rounded-xl text-gray-400">
               <Settings className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-800">Edit Appliance</h1>
-              <p className="text-slate-500">Update details for {appliance.name}</p>
+              <h1 className="text-2xl font-bold text-foreground">Edit Appliance</h1>
+              <p className="text-gray-400">Update details for {appliance.name}</p>
             </div>
           </div>
-          <button onClick={handleDelete} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Delete Appliance">
+          <button onClick={handleDelete} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors" title="Delete Appliance">
             <Trash2 className="w-5 h-5" />
           </button>
         </div>
@@ -99,48 +99,54 @@ export default function EditAppliance() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Appliance Name *</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1">Appliance Name *</label>
               <input required type="text" name="name" value={appliance.name || ''} onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-foreground" />
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Brand</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1">Brand</label>
               <input type="text" name="brand" value={appliance.brand || ''} onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary transition-all" />
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary transition-all text-foreground" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Model Number</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1">Model Number</label>
               <input type="text" name="model_number" value={appliance.model_number || ''} onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary transition-all" />
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary transition-all text-foreground" />
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Serial Number</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1">Serial Number</label>
               <input type="text" name="serial_number" value={appliance.serial_number || ''} onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary transition-all" />
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary transition-all text-foreground" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Location</label>
-              <input type="text" name="location" value={appliance.location || ''} onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-300 mb-1">Category</label>
+              <input type="text" name="category" value={appliance.category || ''} onChange={handleChange}
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary transition-all text-foreground capitalize" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Purchase Date</label>
-              <input type="date" name="purchase_date" value={appliance.purchase_date || ''} onChange={handleChange}
-                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-300 mb-1">Purchase Price</label>
+              <input type="number" step="0.01" name="purchase_price" value={appliance.purchase_price || ''} onChange={handleChange}
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary transition-all text-foreground" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-1">Purchase Date</label>
+              <input type="date" name="purchase_date" value={appliance.purchase_date ? appliance.purchase_date.split('T')[0] : ''} onChange={handleChange}
+                className="w-full px-4 py-2 bg-background/50 border border-border/30 rounded-lg focus:ring-2 focus:ring-primary transition-all text-foreground" style={{colorScheme: 'dark'}} />
             </div>
           </div>
 
-          <div className="pt-4 flex gap-3 justify-end border-t border-slate-100">
-            <button type="button" onClick={() => navigate('/appliances')} className="px-5 py-2.5 text-slate-600 font-medium hover:bg-slate-100 rounded-lg transition-colors">
+          <div className="pt-4 flex gap-3 justify-end border-t border-border/30">
+            <button type="button" onClick={() => navigate('/appliances')} className="px-5 py-2.5 text-gray-400 font-medium hover:bg-white/5 rounded-lg transition-colors">
               Cancel
             </button>
             <button type="submit" disabled={saving}
-              className="bg-primary hover:bg-primary/90 text-white font-medium py-2.5 px-6 rounded-lg transition-colors disabled:opacity-50">
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2.5 px-6 rounded-lg transition-colors disabled:opacity-50">
               {saving ? 'Saving...' : 'Save Changes'}
             </button>
           </div>

@@ -26,6 +26,7 @@ class UserResponse(BaseModel):
     zip_code: str
     city: Optional[str]
     state: Optional[str]
+    home_health_score: int
     created_at: datetime
     updated_at: datetime
 
